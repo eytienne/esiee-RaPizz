@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  flyway:
+    image: flyway/flyway:6.1.4
+  postgres:
+    image: postgres:12-alpine
