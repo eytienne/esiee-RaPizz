@@ -1,9 +1,12 @@
 -- produit
 --
+
+CREATE TYPE uniteIngredient AS ENUM ('gramme', 'unité', 'litre');
+
 CREATE TABLE Ingredient (
   idIngredient SERIAL PRIMARY KEY,
   nom VARCHAR(255) NOT NULL CONSTRAINT UQ_Ingredient_nom UNIQUE,
-  unite VARCHAR(32)
+  unite uniteIngredient
 );
 CREATE TABLE Pizza (
   idPizza SERIAL PRIMARY KEY,
@@ -13,7 +16,7 @@ CREATE TABLE Pizza (
 CREATE TABLE Composition (
   idPizza SERIAL CONSTRAINT FK_Composition_Pizza REFERENCES Pizza (idPizza),
   idIngredient SERIAL CONSTRAINT FK_Composition_Ingredient REFERENCES Ingredient (idIngredient),
-  quantite SMALLINT,
+  quantite REAL,
   CONSTRAINT PK_Composition PRIMARY KEY (idPizza, idIngredient)
 );
 CREATE TABLE TaillePizza (
@@ -34,7 +37,7 @@ CREATE TABLE Personne (
   nom VARCHAR(255) NOT NULL,
   prenom VARCHAR(255) NOT NULL,
   dateNaissance DATE,
-  idAdresse SERIAL NOT NULL CONSTRAINT FK_Personne_Adresse REFERENCES Adresse (idAdresse)
+  idAdresse SERIAL CONSTRAINT FK_Personne_Adresse REFERENCES Adresse (idAdresse)
 );
 CREATE TABLE Gerant (
   idGerant SERIAL PRIMARY KEY,
@@ -63,7 +66,7 @@ CREATE TABLE Vehicule (
   immatriculation VARCHAR(12) PRIMARY KEY,
   typeVehicule typeDeVehicule,
   CONSTRAINT CK_Vehicule_immatriculation_format CHECK (
-    immatriculation SIMILAR TO '(^[a-z]{1,2}( |-)[0-9]{2,3}( |-)[a-z]{1,2}$|^[0-9]{1,4}( |-)[a-z]{1,3}( |-)[0-9a-z]{2,3}$)'
+    immatriculation ~ $$(^[a-zA-Z]{1,2}( |-)[0-9]{2,3}( |-)[a-zA-Z]{1,2}$|^[0-9]{1,4}( |-)[a-zA-Z]{1,3}( |-)[0-9a-zA-Z]{2,3}$)$$
   )
 );
 

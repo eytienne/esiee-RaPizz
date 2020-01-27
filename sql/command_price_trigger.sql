@@ -27,11 +27,14 @@ END;
 $$ LANGUAGE plpgsql;
 
 BEGIN TRANSACTION;
+
 DROP TRIGGER IF EXISTS command_price_trigger ON Commande;
+
 CREATE TRIGGER command_price_trigger
   AFTER INSERT OR UPDATE ON Commande
   FOR EACH ROW
   WHEN (NEW.livree IS NOT NULL)
   EXECUTE PROCEDURE command_price (idCommande);
+
 COMMIT;
 
