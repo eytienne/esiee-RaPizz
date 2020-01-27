@@ -76,5 +76,6 @@ CREATE TABLE Commande (
   idVehicule VARCHAR(12) NOT NULL CONSTRAINT FK_Commande_Vehicule REFERENCES Vehicule (immatriculation),
   commandee TIMESTAMP,
   livree TIMESTAMP,
-  offreFidelite BOOLEAN NOT NULL DEFAULT FALSE
+  offreFidelite BOOLEAN NOT NULL DEFAULT FALSE,
+  prix NUMERIC(6,2) NOT NULL
 );

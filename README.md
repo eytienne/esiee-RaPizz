@@ -8,4 +8,4 @@ Projet base de données 1
 `docker-compose stop`
 
 ### connect to database
-`psql --host=localhost --username postgres`
+`psql --host=localhost --username postgres --dbname rapizz`
