@@ -45,6 +45,9 @@ CREATE TABLE Gerant (
 );
 CREATE TABLE Client (
   idClient SERIAL PRIMARY KEY,
+  pizzasPourFidelite INTEGER NOT NULL DEFAULT 0,
+  solde NUMERIC(6,2) NOT NULL DEFAULT 0,
+  lockedSolde NUMERIC(6,2) NOT NULL DEFAULT 0,
   CONSTRAINT FK_Client_Personne FOREIGN KEY (idClient) REFERENCES Personne (idPersonne)
 );
 CREATE TABLE Livreur (
@@ -63,7 +66,8 @@ CREATE TABLE History (
 CREATE TYPE typeDeVehicule AS ENUM ('voiture', 'moto');
 
 CREATE TABLE Vehicule (
-  immatriculation VARCHAR(12) PRIMARY KEY,
+  idVehicule SERIAL PRIMARY KEY,
+  immatriculation VARCHAR(12) UNIQUE,
   typeVehicule typeDeVehicule,
   CONSTRAINT CK_Vehicule_immatriculation_format CHECK (
     immatriculation ~ $$(^[a-zA-Z]{1,2}( |-)[0-9]{2,3}( |-)[a-zA-Z]{1,2}$|^[0-9]{1,4}( |-)[a-zA-Z]{1,3}( |-)[0-9a-zA-Z]{2,3}$)$$
@@ -76,9 +80,9 @@ CREATE TABLE Commande (
   label VARCHAR(255) NOT NULL CONSTRAINT FK_Commande_Taille REFERENCES TaillePizza (label),
   idClient SERIAL NOT NULL CONSTRAINT FK_Commande_Client REFERENCES Client (idClient),
   idLivreur SERIAL NOT NULL CONSTRAINT FK_Commande_Livreur REFERENCES Livreur (idLivreur),
-  idVehicule VARCHAR(12) NOT NULL CONSTRAINT FK_Commande_Vehicule REFERENCES Vehicule (immatriculation),
+  idVehicule SERIAL NOT NULL CONSTRAINT FK_Commande_Vehicule REFERENCES Vehicule (idVehicule),
   commandee TIMESTAMP,
   livree TIMESTAMP,
   offreFidelite BOOLEAN NOT NULL DEFAULT FALSE,
-  prix NUMERIC(6,2) NOT NULL
+  prix NUMERIC(6,2)
 );

@@ -4,7 +4,7 @@ Projet base de données 1
 ### run database
 `docker-compose up -d postgres`
 
-### stop database 
+### stop database
 `docker-compose stop`
 
 ### connect to database

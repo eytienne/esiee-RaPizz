@@ -13,9 +13,9 @@ VALUES
 
 INSERT INTO TaillePizza (label, coefficient)
 VALUES
-    ('naine', 0.66),
+    ('naine', 2./3),
     ('humaine', 1),
-    ('ogresse',1.33);
+    ('ogresse', 4./3);
 
 INSERT INTO Composition (idPizza, idIngredient, quantite)
 VALUES
@@ -39,10 +39,10 @@ VALUES
     ('Boss', 'Hugo', '1999-01-01', 3),
     ('Himmler', 'Adolf', '1999-01-01', 4);
 
-INSERT INTO Client(idClient)
+INSERT INTO Client(idClient, pizzasPourFidelite, solde, lockedSolde)
 VALUES
-    (1),
-    (2);
+    (1, 8, 20, 20),
+    (2, 0, 0, 0);
 
 INSERT INTO Gerant(idGerant)
 VALUES
@@ -55,3 +55,19 @@ VALUES
 INSERT INTO Vehicule (immatriculation, typeVehicule)
 VALUES 
     ('AA-000-BB', 'voiture');
+
+INSERT INTO Commande(
+        idPizza, label, idClient, 
+        idLivreur, idVehicule, 
+        commandee, livree, offreFidelite
+    )
+VALUES 
+    (1, 'ogresse', 1, 4, 1, 
+    '2020-01-01 15:00:00.000', '2020-01-01 15:25:00.000', FALSE),
+    (1, 'naine', 1, 4, 1, 
+    '2020-01-02 15:00:00.000', '2020-01-02 15:35:00.000', FALSE);
+
+SELECT * FROM Pizza;
+SELECT * FROM Commande;
+SELECT * FROM Client;
+SELECT * FROM History;
