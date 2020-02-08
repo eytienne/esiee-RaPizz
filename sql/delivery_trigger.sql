@@ -1,6 +1,6 @@
 -- si retard remboursement si cadeau pas besoin si payee rien
 
-CREATE OR REPLACE FUNCTION command_price()
+CREATE OR REPLACE FUNCTION delivery()
   RETURNS TRIGGER AS
 $$
 DECLARE tempPrix NUMERIC(6,2) := NULL;
@@ -35,11 +35,11 @@ $$ LANGUAGE plpgsql;
 
 BEGIN TRANSACTION;
 
-DROP TRIGGER IF EXISTS command_price_trigger ON Commande;
+DROP TRIGGER IF EXISTS delivery_trigger ON Commande;
 
-CREATE TRIGGER command_price_trigger 
+CREATE TRIGGER delivery_trigger 
   BEFORE INSERT OR UPDATE ON Commande FOR EACH ROW
-  EXECUTE PROCEDURE command_price();
+  EXECUTE PROCEDURE delivery();
 
 COMMIT;
 

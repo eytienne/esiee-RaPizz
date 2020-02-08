@@ -56,6 +56,9 @@ INSERT INTO Vehicule (immatriculation, typeVehicule)
 VALUES 
     ('AA-000-BB', 'voiture');
 
+SELECT * FROM Pizza;
+
+
 INSERT INTO Commande(
         idPizza, label, idClient, 
         idLivreur, idVehicule, 
@@ -63,11 +66,32 @@ INSERT INTO Commande(
     )
 VALUES 
     (1, 'ogresse', 1, 4, 1, 
-    '2020-01-01 15:00:00.000', '2020-01-01 15:25:00.000', FALSE),
+    '2020-01-01 15:00:00.000', '2020-01-01 15:25:00.000', FALSE);
+SELECT * FROM Commande WHERE idClient = 1;
+SELECT * FROM Client WHERE idClient = 1;
+SELECT * FROM History WHERE idClient = 1;
+
+INSERT INTO Commande(
+        idPizza, label, idClient, 
+        idLivreur, idVehicule, 
+        commandee, livree, offreFidelite
+    )
+VALUES
     (1, 'naine', 1, 4, 1, 
     '2020-01-02 15:00:00.000', '2020-01-02 15:35:00.000', FALSE);
+SELECT * FROM Commande WHERE idClient = 1;
+SELECT * FROM Client WHERE idClient = 1;
+SELECT * FROM History WHERE idClient = 1;
 
-SELECT * FROM Pizza;
-SELECT * FROM Commande;
-SELECT * FROM Client;
-SELECT * FROM History;
+
+INSERT INTO Commande(
+        idPizza, label, idClient, 
+        idLivreur, idVehicule, 
+        commandee, livree, offreFidelite
+    )
+VALUES
+    (1, 'humaine', 1, 4, 1, 
+    '2020-01-02 15:00:00.000', '2020-01-02 15:15:00.000', FALSE);
+SELECT * FROM Commande WHERE idClient = 1;
+SELECT * FROM Client WHERE idClient = 1;
+SELECT * FROM History WHERE idClient = 1;
