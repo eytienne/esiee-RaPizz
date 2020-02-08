@@ -41,7 +41,7 @@ VALUES
 
 INSERT INTO Client(idClient, pizzasPourFidelite, solde, lockedSolde)
 VALUES
-    (1, 8, 20, 20),
+    (1, 8, 20, 0),
     (2, 0, 0, 0);
 
 INSERT INTO Gerant(idGerant)
@@ -58,40 +58,78 @@ VALUES
 
 SELECT * FROM Pizza;
 
+SELECT '9th';
 
 INSERT INTO Commande(
-        idPizza, label, idClient, 
+        idPizza, idTaillePizza, idClient, 
         idLivreur, idVehicule, 
         commandee, livree, offreFidelite
     )
 VALUES 
-    (1, 'ogresse', 1, 4, 1, 
+    (1, 3, 1, 4, 1, 
     '2020-01-01 15:00:00.000', '2020-01-01 15:25:00.000', FALSE);
 SELECT * FROM Commande WHERE idClient = 1;
 SELECT * FROM Client WHERE idClient = 1;
 SELECT * FROM History WHERE idClient = 1;
 
+
+SELECT '10th';
+
 INSERT INTO Commande(
-        idPizza, label, idClient, 
+        idPizza, idTaillePizza, idClient, 
         idLivreur, idVehicule, 
         commandee, livree, offreFidelite
     )
 VALUES
-    (1, 'naine', 1, 4, 1, 
-    '2020-01-02 15:00:00.000', '2020-01-02 15:35:00.000', FALSE);
+    (1, 1, 1, 4, 1, 
+    '2020-01-02 16:00:00.000', '2020-01-02 16:35:00.000', FALSE);
 SELECT * FROM Commande WHERE idClient = 1;
 SELECT * FROM Client WHERE idClient = 1;
 SELECT * FROM History WHERE idClient = 1;
 
 
+SELECT 'given';
+
 INSERT INTO Commande(
-        idPizza, label, idClient, 
+        idPizza, idTaillePizza, idClient, 
         idLivreur, idVehicule, 
         commandee, livree, offreFidelite
     )
 VALUES
-    (1, 'humaine', 1, 4, 1, 
-    '2020-01-02 15:00:00.000', '2020-01-02 15:15:00.000', FALSE);
+    (1, 2, 1, 4, 1, 
+    '2020-01-02 17:00:00.000', '2020-01-02 17:15:00.000', FALSE);
+SELECT * FROM Commande WHERE idClient = 1;
+SELECT * FROM Client WHERE idClient = 1;
+SELECT * FROM History WHERE idClient = 1;
+
+
+SELECT 'refused';
+
+INSERT INTO Commande(
+        idPizza, idTaillePizza, idClient, 
+        idLivreur, idVehicule, 
+        commandee, livree, offreFidelite
+    )
+VALUES
+    (1, 2, 1, 4, 1, 
+    '2020-01-02 18:00:00.000', '2020-01-02 18:15:00.000', FALSE);
+SELECT * FROM Commande WHERE idClient = 1;
+SELECT * FROM Client WHERE idClient = 1;
+SELECT * FROM History WHERE idClient = 1;
+
+
+SELECT '1st';
+
+UPDATE Client SET solde = 20 WHERE idClient = 1;
+
+INSERT INTO Commande(
+        idPizza, idTaillePizza, idClient, 
+        idLivreur, idVehicule, 
+        commandee, livree, offreFidelite
+    )
+VALUES
+    (1, 2, 1, 4, 1, 
+    '2020-01-02 19:00:00.000', '2020-01-02 18:19:00.000', FALSE);
 SELECT * FROM Commande WHERE idClient = 1;
 SELECT * FROM Client WHERE idClient = 1;
 SELECT * FROM History WHERE idClient = 1;

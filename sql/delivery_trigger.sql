@@ -3,7 +3,7 @@
 CREATE OR REPLACE FUNCTION delivery()
   RETURNS TRIGGER AS
 $$
-DECLARE tempPrix NUMERIC(6,2) := NULL;
+DECLARE tempPrix NUMERIC(6,2);
 BEGIN
   IF(NEW.livree IS NOT NULL AND NEW.prix IS NULL) THEN
     
@@ -16,7 +16,7 @@ BEGIN
       END), pp.prixDeBase*tp.coefficient INTO NEW.prix, tempPrix
     FROM
       Pizza pp, TaillePizza tp
-    WHERE pp.idPizza = NEW.idPizza AND tp.label = NEW.label;
+    WHERE pp.idPizza = NEW.idPizza AND tp.idTaillePizza = NEW.idTaillePizza;
     
     IF(NOT NEW.offreFidelite) THEN
       UPDATE Client 

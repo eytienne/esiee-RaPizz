@@ -20,7 +20,8 @@ CREATE TABLE Composition (
   CONSTRAINT PK_Composition PRIMARY KEY (idPizza, idIngredient)
 );
 CREATE TABLE TaillePizza (
-  label VARCHAR(255) PRIMARY KEY,
+  idTaillePizza SERIAL PRIMARY KEY,
+  label VARCHAR(255) CONSTRAINT UQ_TaillePizza_label UNIQUE,
   coefficient REAL NOT NULL
 );
 -- rôles utilisateurs
@@ -60,7 +61,7 @@ CREATE TABLE History (
   idOperation SERIAL PRIMARY KEY,
   idClient SERIAL NOT NULL CONSTRAINT FK_History_Client REFERENCES Client (idClient),
   montant NUMERIC(6, 2) NOT NULL,
-  dateOperation DATE NOT NULL
+  dateOperation TIMESTAMP NOT NULL
 );
 
 CREATE TYPE typeDeVehicule AS ENUM ('voiture', 'moto');
@@ -77,7 +78,7 @@ CREATE TABLE Vehicule (
 CREATE TABLE Commande (
   idCommande SERIAL PRIMARY KEY,
   idPizza SERIAL NOT NULL CONSTRAINT FK_Commande_Pizza REFERENCES Pizza (idPizza),
-  label VARCHAR(255) NOT NULL CONSTRAINT FK_Commande_Taille REFERENCES TaillePizza (label),
+  idTaillePizza SERIAL NOT NULL CONSTRAINT FK_Commande_Taille REFERENCES TaillePizza (idTaillePizza),
   idClient SERIAL NOT NULL CONSTRAINT FK_Commande_Client REFERENCES Client (idClient),
   idLivreur SERIAL NOT NULL CONSTRAINT FK_Commande_Livreur REFERENCES Livreur (idLivreur),
   idVehicule SERIAL NOT NULL CONSTRAINT FK_Commande_Vehicule REFERENCES Vehicule (idVehicule),
