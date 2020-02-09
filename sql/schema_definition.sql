@@ -49,7 +49,8 @@ CREATE TABLE Client (
   pizzasPourFidelite INTEGER NOT NULL DEFAULT 0,
   solde NUMERIC(6,2) NOT NULL DEFAULT 0,
   lockedSolde NUMERIC(6,2) NOT NULL DEFAULT 0,
-  CONSTRAINT FK_Client_Personne FOREIGN KEY (idClient) REFERENCES Personne (idPersonne)
+  CONSTRAINT FK_Client_Personne FOREIGN KEY (idClient) REFERENCES Personne (idPersonne),
+  CONSTRAINT CK_Client_solde_consistency CHECK(solde >= lockedSolde AND lockedSolde >= 0)
 );
 CREATE TABLE Livreur (
   idLivreur SERIAL PRIMARY KEY,
@@ -68,7 +69,7 @@ CREATE TYPE typeDeVehicule AS ENUM ('voiture', 'moto');
 
 CREATE TABLE Vehicule (
   idVehicule SERIAL PRIMARY KEY,
-  immatriculation VARCHAR(12) UNIQUE,
+  immatriculation VARCHAR(12) NOT NULL CONSTRAINT UQ_Vehicule_immatriculation UNIQUE,
   typeVehicule typeDeVehicule,
   CONSTRAINT CK_Vehicule_immatriculation_format CHECK (
     immatriculation ~ $$(^[a-zA-Z]{1,2}( |-)[0-9]{2,3}( |-)[a-zA-Z]{1,2}$|^[0-9]{1,4}( |-)[a-zA-Z]{1,3}( |-)[0-9a-zA-Z]{2,3}$)$$

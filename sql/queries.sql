@@ -1,18 +1,20 @@
 -- Menu
 
-SELECT p.nom, p.prixDeBase, array_agg(i.nom) 
+CREATE OR REPLACE VIEW Menu AS
+SELECT p.nom, p.prixDeBase, array_agg(i.nom) as ingredients
 FROM Pizza p LEFT JOIN Composition c ON p.idPizza = c.idPizza 
     LEFT JOIN Ingredient i ON c.idIngredient = i.idIngredient 
 GROUP BY 1,2;
 
 -- Fiche de livraison
 
-SELECT l.nom, v.typeVehicule, cl.nom, co.commandee, 
+CREATE OR REPLACE VIEW FicheLivraison AS
+SELECT co.idCommande, l.nom as nomLivreur, v.typeVehicule, cl.nom as nomClient, co.commandee, 
     CASE WHEN (co.livree - co.commandee) > interval '00:30:00' 
         THEN (co.livree - co.commandee) - interval '00:30:00' 
         ELSE interval '00:00:00'
     END as retard,
-    p.nom, p.prixDeBase
+    p.nom as nomPizza, p.prixDeBase
 FROM Commande co LEFT JOIN Pizza p ON p.idPizza = co.idPizza
     LEFT JOIN Personne l ON l.idPersonne = co.idLivreur
     LEFT JOIN Personne cl ON cl.idPersonne = idClient

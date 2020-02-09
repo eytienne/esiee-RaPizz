@@ -1,6 +1,3 @@
--- si retard remboursement si cadeau pas besoin si payee rien
-
--------------------------
 
 CREATE OR REPLACE FUNCTION command()
   RETURNS TRIGGER AS

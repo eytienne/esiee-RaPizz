@@ -12,4 +12,4 @@ Projet base de données 1
 
 ### retest all
 
-`psql --host=localhost --username postgres --dbname rapizz -f sql/drop_all.sql -f sql/schema_definition.sql -f sql/command_trigger.sql -f sql/delivery_trigger.sql -f sql/dataset.sql`
+`psql --host=localhost --username postgres --dbname rapizz -f sql/drop_all.sql -f sql/schema_definition.sql -f sql/command_trigger.sql -f sql/delivery_trigger.sql -f sql/queries.sql -f sql/dataset.sql`
