@@ -12,8 +12,9 @@ public class DatabaseAccess {
 	private static Connection connection;
 	
 	static {
+		new org.postgresql.Driver();
 		try {
-			Class.forName("org.postgresql.Driver");
+			
 			int cpt = 0;
 			while (connection == null && cpt < MAX_TRIALS) {
 				Properties pp = new Properties();
@@ -27,10 +28,10 @@ public class DatabaseAccess {
 		}
 	}
 
-	public static Connection getConnection() throws Exception {
+	public static Connection getConnection() {
 		return connection;
 	}
-	
+
 	public static void closeConnection() throws SQLException {
 		connection.close();
 	}
