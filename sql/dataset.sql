@@ -9,7 +9,8 @@ VALUES
 INSERT INTO Pizza (nom, prixDeBase)
 VALUES
   ('Chèvre-miel', 10),
-  ('Calzone', 12);
+  ('Calzone', 12),
+  ('Surprise', 9);
 
 INSERT INTO TaillePizza (label, coefficient)
 VALUES
@@ -54,7 +55,9 @@ VALUES
 
 INSERT INTO Vehicule (immatriculation, typeVehicule)
 VALUES 
-    ('AA-000-BB', 'voiture');
+    ('AA-000-BB', 'voiture'),
+    ('YY-123-ZZ', 'moto'),
+    ('RB-777-RB', 'moto');
 
 SELECT * FROM Pizza;
 
@@ -133,3 +136,13 @@ VALUES
 SELECT * FROM Commande WHERE idClient = 1;
 SELECT * FROM Client WHERE idClient = 1;
 SELECT * FROM History WHERE idClient = 1;
+
+UPDATE Client set solde = 30 where idclient = 2;
+INSERT INTO Commande(
+        idPizza, idTaillePizza, idClient, 
+        idLivreur, idVehicule, 
+        commandee, livree, offreFidelite
+    )
+VALUES
+    (1, 2, 2, 4, 1, 
+    '2020-01-02 19:00:00.000', '2020-01-02 18:19:00.000', FALSE);
